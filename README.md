@@ -1,4 +1,4 @@
-# Real-Digital Code Challenge
+# Custom-Elements Code Challenge
 
 ## Installation
 
