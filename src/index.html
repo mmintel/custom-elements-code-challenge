@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <real-digital-form action="/script.php" method="POST">
+        <real-digital-textfield label="Name" name="name" validation="[a-z]+"></real-digital-textfield>
+        <real-digital-textfield label="Phone" name="phone" validation="[0-9]+"></real-digital-textfield>
+        <real-digital-textfield label="Subject" name="subject"></real-digital-textfield>
+        <real-digital-button type="submit">Submit</real-digital-button>
+    </real-digital-form>
+</body>
+
+</html>
