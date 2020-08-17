@@ -15,15 +15,15 @@ The goal is to write a series of Custom elements (HTML Standard) that can send u
 This example HTML snippet should work as described after you implemented the task:
 
 ```
-<real-digital-form action="/script.php" method="POST">
-  <real-digital-textfield name="name" validation="[a-z]+" />
-  <real-digital-textfield name="phone" validation="[0-9]+" />
-  <real-digital-textfield name="subject" />
-  <real-digital-button> Send </real-digital-button>
-</real-digital-form>
+<app-form action="/script.php" method="POST">
+  <app-textfield name="name" validation="[a-z]+" />
+  <app-textfield name="phone" validation="[0-9]+" />
+  <app-textfield name="subject" />
+  <app-button> Send </app-button>
+</app-form>
 ```
 
-The `<real-digital-form />` element encapsulates a form. It exposes a method submit to send the data programatically. Furthermore, when the child element `<real-digital-button />` is clicked, the form will also be submitted. `<real-digital-form />` always sends a json encoded request to the endpoint specified in the attribute action with the HTTP method specified in the attribute method. The values of all child elements `<real-digital-textfield />` will be the form data. The json key of each textfield value is specified in the attribute name. Before sending, the element should also trigger an onSubmit event with the form data in the event payload before the data is sent to the target. Event listeners to onSubmit can edit the form data on their behalf. The submitting process will only take place when the validation of each `<real-digital-textfield />` succeeds. The validation is specified as a regular expression in the attribute validation of `<real-digitaltextfield />`. In case of a validation error, the submit will be aborted and the errors are shown in a p tag below the `<real-digitaltextfield />`. When the server responds, the onResponse event, which has the HTTP response in the payload, is triggered.
+The `<app-form />` element encapsulates a form. It exposes a method submit to send the data programatically. Furthermore, when the child element `<app-button />` is clicked, the form will also be submitted. `<app-form />` always sends a json encoded request to the endpoint specified in the attribute action with the HTTP method specified in the attribute method. The values of all child elements `<app-textfield />` will be the form data. The json key of each textfield value is specified in the attribute name. Before sending, the element should also trigger an onSubmit event with the form data in the event payload before the data is sent to the target. Event listeners to onSubmit can edit the form data on their behalf. The submitting process will only take place when the validation of each `<app-textfield />` succeeds. The validation is specified as a regular expression in the attribute validation of `<real-digitaltextfield />`. In case of a validation error, the submit will be aborted and the errors are shown in a p tag below the `<real-digitaltextfield />`. When the server responds, the onResponse event, which has the HTTP response in the payload, is triggered.
 
 _Hint: You can use http://httpbin.org to avoid writing a server._
 
@@ -42,8 +42,8 @@ I decided to mount all components into the shadow DOM to encapsulate them from t
 
 ## Caveats
 
-- in contrast to the given code example I added a `type="submit"` to the `real-digital-button` in order to decouple behaviour within the `react-digital-form` from the visual appearance of the button
-- `Form` queries for `[name]` instead of `input` because you cannot simply access each input inside the shadow dom of children nor should you do it because this would break the encapsulation you wanted to achieve in the first place. Querying for `real-digital-textfield` might be good enough to complete this task but would break as soon as there is another field type. However each element must simply have a `name` and a `value` to be appropriate for form data. To make sure this will be applied correctly I've added another abstraction of `Element` the `FormField`.
+- in contrast to the given code example I added a `type="submit"` to the `app-button` in order to decouple behaviour within the `react-digital-form` from the visual appearance of the button
+- `Form` queries for `[name]` instead of `input` because you cannot simply access each input inside the shadow dom of children nor should you do it because this would break the encapsulation you wanted to achieve in the first place. Querying for `app-textfield` might be good enough to complete this task but would break as soon as there is another field type. However each element must simply have a `name` and a `value` to be appropriate for form data. To make sure this will be applied correctly I've added another abstraction of `Element` the `FormField`.
 - Considering time I didn't touch any CSS.. and didn't write any tests :/
 - I didn't add the `scripts.php`, because php...but on submit you will see the payload is passed to the action
 
